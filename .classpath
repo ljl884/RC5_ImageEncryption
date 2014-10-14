@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Home"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcmail-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcpg-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcpkix-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcprov-debug-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcprov-ext-debug-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcprov-ext-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bcprov-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/bctest-jdk15on-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/jce-ext-jdk13-151.jar"/>
+	<classpathentry kind="lib" path="/Users/Egmont/Documents/MSE/Development/crypto-151/jars/jce-jdk13-151.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
