@@ -166,12 +166,16 @@ public class RC5Test
     public TestResult perform()
     {
         for (int i = 0; i != tests.length; i++)
-        {
+        {   
+        	long startTime = System.nanoTime();
             TestResult  res = tests[i].perform();
-
+            long endTime   = System.nanoTime();
+            long totalTime = endTime - startTime;
+            System.out.println(totalTime + "  ns");
             if (!res.isSuccessful())
             {
                 return res;
+                
             }
         }
 
