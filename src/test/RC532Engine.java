@@ -102,7 +102,7 @@ public class RC532Engine
         int     outOff)
     {
         return (forEncryption) ? encryptBlock(in, inOff, out, outOff) 
-                                    : decryptBlock(in, inOff, out, outOff);
+                               : decryptBlock(in, inOff, out, outOff);
     }
 
     public void reset()
@@ -136,6 +136,7 @@ public class RC532Engine
         {
             mm = (key[i] & 0xff);
         	L[i / 4] = L[i / 4] + (key[i] & 0xff) << (8 * (i % 4));
+        	System.out.println(mm);
         }
 
         //
@@ -248,7 +249,7 @@ public class RC532Engine
      * @param  x  word to rotate
      * @param  y    number of bits to rotate % 32
      */
-    private int rotateLeft(int x, int y)
+    public int rotateLeft(int x, int y)
     {
         return ((x << (y & (32-1))) | (x >>> (32 - (y & (32-1)))));
     }
@@ -268,7 +269,7 @@ public class RC532Engine
         return ((x >>> (y & (32-1))) | (x << (32 - (y & (32-1)))));
     }
 
-    private int bytesToWord(
+    public int bytesToWord(
         byte[]  src,
         int     srcOff)
     {
@@ -276,7 +277,7 @@ public class RC532Engine
             | ((src[srcOff + 2] & 0xff) << 16) | ((src[srcOff + 3] & 0xff) << 24);
     }
 
-    private void wordToBytes(
+    public void wordToBytes(
         int    word,
         byte[]  dst,
         int     dstOff)
