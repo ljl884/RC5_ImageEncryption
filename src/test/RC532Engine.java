@@ -143,7 +143,7 @@ public class RC532Engine
         	
         	//System.out.println( i + "    " + mask + "    " +  (key[i] & 0xff)  + "    " +  L[i / 4] +"   "+ 8 * (i % 4) );
         }
-        System.out.println("This is L:   " +Arrays.toString(L));
+        //System.out.println("This is L:   " +Arrays.toString(L));
         //
         // Phase 2:
         //   Initialize S to a particular fixed pseudo-random bit pattern
@@ -153,12 +153,12 @@ public class RC532Engine
         _S            = new int[2*(_noRounds + 1)];
 
         _S[0] = P32;
-        System.out.println(Arrays.toString(_S));
+        //System.out.println(Arrays.toString(_S));
         for (int i=1; i < _S.length; i++)
         {
             _S[i] = (_S[i-1] + Q32);
-            System.out.print(i + "---->");
-            System.out.println(Arrays.toString(_S));
+           // System.out.print(i + "---->");
+           // System.out.println(Arrays.toString(_S));
         }
 
         //
@@ -166,7 +166,7 @@ public class RC532Engine
         //   Mix in the user's secret key in 3 passes over the arrays S & L.
         //   The max of the arrays sizes is used as the loop control
         //
-        System.out.println("This is S------------------------");
+        // System.out.println("This is S------------------------");
         int iter;
 
         if (L.length > _S.length)
@@ -187,9 +187,9 @@ public class RC532Engine
             B =  L[j] = rotateLeft(L[j] + A + B, A+B);
             i = (i+1) % _S.length;
             j = (j+1) %  L.length;
-            System.out.print(k + "---->");
-            System.out.print(A + "--------");
-            System.out.println(B);
+//            System.out.print(k + "---->");
+//            System.out.print(A + "--------");
+//            System.out.println(B);
         }
     }
 
@@ -210,11 +210,11 @@ public class RC532Engine
     {
         int A = bytesToWord(in, inOff) + _S[0];
         int B = bytesToWord(in, inOff + 4) + _S[1];
-
-       
-        System.out.print(A + "--------");
-        System.out.println(B);
-        
+//
+//       
+//        System.out.print(A + "--------");
+//        System.out.println(B);
+//        
        
         for (int i = 1; i <= _noRounds; i++)
         {
@@ -224,7 +224,7 @@ public class RC532Engine
         
         wordToBytes(A, out, outOff);
         wordToBytes(B, out, outOff + 4);
-        System.out.println("This is out:" + Arrays.toString(out) + Hex.toHexString( out ));
+        //System.out.println("This is out:" + Arrays.toString(out) + Hex.toHexString( out ));
         
         return 2 * 4;
     }
