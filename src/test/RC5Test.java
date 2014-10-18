@@ -25,7 +25,7 @@ public class RC5Test
           		new ParametersWithIV(
              			new RC5Parameters(Hex.decode("01"), 2),
              			Hex.decode("0000000000000000")),
-          "0000000000000000", "7a7bba4d79111d1e")
+          "0000000000000000", "2bd8d1e93365ed16")
 //        new BlockCipherVectorTest(0, new CBCBlockCipher(new RC532Engine()),
 //                new ParametersWithIV(
 //                    new RC5Parameters(Hex.decode("00"), 0),

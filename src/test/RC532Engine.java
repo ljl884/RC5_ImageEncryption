@@ -1,9 +1,12 @@
 package test;
 
+import java.util.Arrays;
+
 import org.bouncycastle.crypto.BlockCipher;
 import org.bouncycastle.crypto.CipherParameters;
 import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.RC5Parameters;
+import org.bouncycastle.util.encoders.Hex;
 
 /**
  * The specification for RC5 came from the <code>RC5 Encryption Algorithm</code>
@@ -114,7 +117,7 @@ public class RC532Engine
      * <p>
      * @param  key  the key to be used
      */
-    private void setKey(
+    public void setKey(
         byte[]      key)
     {
         //
@@ -130,15 +133,17 @@ public class RC532Engine
         //   case that b = c = 0, set c = 1 and L[0] = 0.
         //
         int[]   L = new int[(key.length + (4 - 1)) / 4];
-        int mm = 0;
-
+        int mask = 0;
+        //System.out.println(Arrays.toString(L));
+        //System.out.println("i"+ "    " +"0xff"+ "    " + "key[i] & 0xff" + "    " + "L[i / 4]"+"   "+"8 * (i % 4)");
         for (int i = 0; i != key.length; i++)
         {
-            mm = (key[i] & 0xff);
+            mask = (key[i] & 0xff);
         	L[i / 4] = L[i / 4] + (key[i] & 0xff) << (8 * (i % 4));
-        	System.out.println(mm);
+        	
+        	//System.out.println( i + "    " + mask + "    " +  (key[i] & 0xff)  + "    " +  L[i / 4] +"   "+ 8 * (i % 4) );
         }
-
+        System.out.println("This is L:   " +Arrays.toString(L));
         //
         // Phase 2:
         //   Initialize S to a particular fixed pseudo-random bit pattern
@@ -148,9 +153,12 @@ public class RC532Engine
         _S            = new int[2*(_noRounds + 1)];
 
         _S[0] = P32;
+        System.out.println(Arrays.toString(_S));
         for (int i=1; i < _S.length; i++)
         {
             _S[i] = (_S[i-1] + Q32);
+            System.out.print(i + "---->");
+            System.out.println(Arrays.toString(_S));
         }
 
         //
@@ -158,6 +166,7 @@ public class RC532Engine
         //   Mix in the user's secret key in 3 passes over the arrays S & L.
         //   The max of the arrays sizes is used as the loop control
         //
+        System.out.println("This is S------------------------");
         int iter;
 
         if (L.length > _S.length)
@@ -178,6 +187,9 @@ public class RC532Engine
             B =  L[j] = rotateLeft(L[j] + A + B, A+B);
             i = (i+1) % _S.length;
             j = (j+1) %  L.length;
+            System.out.print(k + "---->");
+            System.out.print(A + "--------");
+            System.out.println(B);
         }
     }
 
@@ -199,6 +211,11 @@ public class RC532Engine
         int A = bytesToWord(in, inOff) + _S[0];
         int B = bytesToWord(in, inOff + 4) + _S[1];
 
+       
+        System.out.print(A + "--------");
+        System.out.println(B);
+        
+       
         for (int i = 1; i <= _noRounds; i++)
         {
             A = rotateLeft(A ^ B, B) + _S[2*i];
@@ -207,6 +224,7 @@ public class RC532Engine
         
         wordToBytes(A, out, outOff);
         wordToBytes(B, out, outOff + 4);
+        System.out.println("This is out:" + Arrays.toString(out) + Hex.toHexString( out ));
         
         return 2 * 4;
     }
