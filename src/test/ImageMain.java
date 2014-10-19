@@ -22,10 +22,10 @@ public class ImageMain{
 		//System.out.println(IC.makeBlock64bit(inputBytes));
 		
 		CBCOperater operater = new CBCOperater( 
-				new CBCBlockCipher(new RC532Engine()),
+				new CBCBlockCipher(new RC564Engine()),
 				new RC5Parameters(Hex.decode("01"), 2),
-				Hex.decode("0000000000000000"),
-				IC.makeBlocks(inputBytes,32));
+				Hex.decode("00000000000000000000000000000000"),
+				IC.makeBlocks(inputBytes,64));
 		ArrayList<String> ciphertext = operater.encrypt();
 		
 		IC.bytesToimage(IC.stringListToBytes(ciphertext),"/Users/Egmont/Documents/CryptoImageTest/encrypted.bmp");
@@ -33,9 +33,9 @@ public class ImageMain{
 
 
 		CBCOperater operater2 = new CBCOperater( 
-				new CBCBlockCipher(new RC532Engine()),
+				new CBCBlockCipher(new RC564Engine()),
 				new RC5Parameters(Hex.decode("01"), 2),
-				Hex.decode("0000000000000000"),
+				Hex.decode("00000000000000000000000000000000"),
 				ciphertext);
 		ArrayList<String> plaintext = operater2.decrypt();
 
