@@ -44,7 +44,7 @@ public class Main {
 		input.add("0000000000000000");
 		input.add("0000000000000000");
 		input.add("0000000000000000");
-		CBCOperater operater = new CBCOperater( 
+		CBCOperator operater = new CBCOperator( 
 				new CBCBlockCipher(new RC532Engine()),
 				new RC5Parameters(Hex.decode("00"), 0),
 				Hex.decode("0000000000000000"),
@@ -54,7 +54,7 @@ public class Main {
 			System.out.println(s);
 		}
 		
-		CBCOperater operater2 = new CBCOperater( 
+		CBCOperator operater2 = new CBCOperator( 
 				new CBCBlockCipher(new RC532Engine()),
 				new RC5Parameters(Hex.decode("00"), 0),
 				Hex.decode("0000000000000000"),

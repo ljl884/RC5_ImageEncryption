@@ -86,7 +86,7 @@ public class TestCase {
 		}
 		
 		
-		String outputFileName = outputFolder+"encrpted_"+modeString+wordSize+"_"+rounds+"_"+secretKey.length()+".bmp";
+		String outputFileName = outputFolder+"encrpted_"+modeString+"_"+wordSize+"_"+rounds+"_"+secretKey.length()*2+".bmp";
 		IC.bytesToimage(IC.stringListToBytes(output), outputFileName);
 	}
 	

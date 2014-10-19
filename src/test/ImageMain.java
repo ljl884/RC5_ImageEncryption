@@ -10,10 +10,10 @@ import org.bouncycastle.util.encoders.Hex;
 public class ImageMain{
 	
 	public static int wordSize = 32;
-	public static int rounds = 12;
+	public static int rounds = 0;
 	public static String initializationVector = "0000000000000000";
 	public static String secretKey = "00000000";
-	public static String inputFileName = "/Users/Egmont/Documents/CryptoImageTest/logo.bmp";
+	public static String inputFileName = "/Users/Egmont/Documents/CryptoImageTest/Logo.bmp";
 	
 	public static void main(String[] arg) throws Exception{
 		
@@ -27,19 +27,19 @@ public class ImageMain{
 		}
 		
 		// Encrypt image
-//		CBCOperater operater = new CBCOperater( 
-//				new CBCBlockCipher(new RC532Engine()),
-//				new RC5Parameters(Hex.decode(secretKey), rounds), //Secret Key, Rounds
-//				Hex.decode(initializationVector),                 //Initialization Vector
-//				IC.makeBlocks(inputBytes,wordSize*2));			//imageBytes, wordsize
-//		ArrayList<String> ciphertext = operater.encrypt();
+		CBCOperator operater = new CBCOperator( 
+				new CBCBlockCipher(new RC532Engine()),
+				new RC5Parameters(Hex.decode(secretKey), rounds), //Secret Key, Rounds
+				Hex.decode(initializationVector),                 //Initialization Vector
+				IC.makeBlocks(inputBytes,wordSize));			//imageBytes, wordsize
+		ArrayList<String> ciphertext = operater.encrypt();
 		
-		ECBOPerater ecboperater = new ECBOPerater(new RC532Engine(),
-				new RC5Parameters(Hex.decode(secretKey), rounds),
-				IC.makeBlocks(inputBytes, wordSize));
-		ArrayList<String> ecbciphertext = ecboperater.encrypt();
+//		ECBOperator ecboperater = new ECBOperator(new RC532Engine(),
+//				new RC5Parameters(Hex.decode(secretKey), rounds),
+//				IC.makeBlocks(inputBytes, wordSize));
+//		ArrayList<String> ecbciphertext = ecboperater.encrypt();
 		
-		IC.bytesToimage(IC.stringListToBytes(ecbciphertext),"/Users/Egmont/Documents/CryptoImageTest/encrypted.bmp");
+		IC.bytesToimage(IC.stringListToBytes(ciphertext),"/Users/Egmont/Documents/CryptoImageTest/encrypted.bmp");
 
 
 		// Decrypt image
