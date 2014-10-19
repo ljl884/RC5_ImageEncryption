@@ -15,13 +15,13 @@ public class CFBOperator extends Operator{
 
 	@Override
 	public ArrayList<String> encrypt() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public ArrayList<String> decrypt() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
