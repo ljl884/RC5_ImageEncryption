@@ -12,7 +12,7 @@ import org.bouncycastle.util.encoders.Hex;
 
 public class CBCOperater {
 	
-	private static int BLOCK_STRING_SIZE =32;
+	private static int BLOCK_STRING_SIZE = 8;
 	
 	private BlockCipher engine;
 	private CipherParameters param;
@@ -37,6 +37,8 @@ public class CBCOperater {
 			//if the size of the string is not expected, throw exception
 			if(block.length()!=BLOCK_STRING_SIZE){
 				throw new Exception("block size exception");
+//				result.add(block);
+//				continue;
 			}
 			
 			

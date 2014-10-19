@@ -88,7 +88,7 @@ public class ImageConverter{
 				block[j]=image[m];
 				}					
 			}
-			System.out.println(Hex.toHexString(block));
+			//System.out.println(Hex.toHexString(block));
 			imageString.add(Hex.toHexString(block));
 			//System.out.println(imageString);
 			i+=(blocksize-1);
