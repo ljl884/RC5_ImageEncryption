@@ -8,7 +8,7 @@ import org.bouncycastle.crypto.params.ParametersWithIV;
 import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.util.encoders.Hex;
 
-public abstract class  Operater {
+public abstract class  Operator {
 	
 	protected static int BLOCK_STRING_SIZE =8;
 	
@@ -17,7 +17,7 @@ public abstract class  Operater {
 	protected ArrayList<String> input;
 	protected byte[] IV;
 	
-	public Operater(BlockCipher engine,RC5Parameters param, ArrayList<String> input) {
+	public Operator(BlockCipher engine,RC5Parameters param, ArrayList<String> input) {
 		this.engine=engine;
 		this.param=param;
 		this.input = input;
@@ -26,7 +26,7 @@ public abstract class  Operater {
 		
 	}
 	
-	public Operater(BlockCipher engine, RC5Parameters param, byte[] iV,
+	public Operator(BlockCipher engine, RC5Parameters param, byte[] iV,
 			ArrayList<String> input) {
 		this.engine=engine;
 		this.param=param;

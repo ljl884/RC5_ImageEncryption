@@ -6,9 +6,9 @@ import org.bouncycastle.crypto.BlockCipher;
 import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.util.encoders.Hex;
 
-public class ECBOPerater extends Operater {
+public class ECBOPerator extends Operator {
 
-	public ECBOPerater(BlockCipher engine, RC5Parameters param,
+	public ECBOPerator(BlockCipher engine, RC5Parameters param,
 			ArrayList<String> input) {
 		super(engine, param, input);
 		
