@@ -10,20 +10,11 @@ import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.util.encoders.Hex;
 
 
-public class CBCOperater {
-	
-	private static int BLOCK_STRING_SIZE =32;
-	
-	private BlockCipher engine;
-	private CipherParameters param;
-	private ArrayList<String> input;
-	private byte[] IV;
+public class CBCOperater extends Operater {
 	
 	public CBCOperater(BlockCipher engine,RC5Parameters param,byte[] IV, ArrayList<String> input) {
-		this.engine=engine;
-		this.param=param;
-		this.input = input;
-		this.IV = IV;
+		super(engine, param, IV, input);
+	
 	}
 	
 	public ArrayList<String> encrypt() throws Exception{
@@ -36,6 +27,7 @@ public class CBCOperater {
 			
 			//if the size of the string is not expected, throw exception
 			if(block.length()!=BLOCK_STRING_SIZE){
+				System.out.println(block.length());
 				throw new Exception("block size exception");
 			}
 			
