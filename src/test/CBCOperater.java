@@ -12,7 +12,7 @@ import org.bouncycastle.util.encoders.Hex;
 
 public class CBCOperater {
 	
-	private static int BLOCK_STRING_SIZE =16;
+	private static int BLOCK_STRING_SIZE =32;
 	
 	private BlockCipher engine;
 	private CipherParameters param;
