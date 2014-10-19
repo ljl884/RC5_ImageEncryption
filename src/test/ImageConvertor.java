@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ import org.bouncycastle.crypto.modes.CBCBlockCipher;
 import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.util.encoders.Hex;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
 
 
 /**
@@ -33,7 +34,7 @@ public class ImageConvertor{
 		 BufferedImage bufferedImage = ImageIO.read(imgPath);
 		 
 		 ByteArrayOutputStream baos=new ByteArrayOutputStream(1000);
-		 ImageIO.write(bufferedImage, "png", baos);
+		 ImageIO.write(bufferedImage, "bmp", baos);
 		 baos.flush();
 		 
 		 byte[] bytearray = baos.toByteArray();
@@ -56,12 +57,24 @@ public class ImageConvertor{
 	}
 	
 	private void bytesToimage (byte[] imagebyte) throws IOException{
+		
+		byte dataToWrite[] = imagebyte;
+				FileOutputStream out = new FileOutputStream("/Users/Egmont/Documents/CryptoImageTest/result.bmp");
+				out.write(dataToWrite);
+				out.close();
 	 
-		 BufferedImage imag=ImageIO.read(new ByteArrayInputStream(imagebyte));
-		 
-		 ImageIO.write(imag, "png", new File("/Users/Egmont/Documents/result.png"));
+//		 BufferedImage imag=ImageIO.read(new ByteArrayInputStream(imagebyte));
+//		 
+//		 ImageIO.write(imag, "png", new File("/Users/Egmont/Documents/result.png"));
 		 
 	}
+	
+//	private void stringListToimage(ArrayList<String> list){
+//		
+//		for (String element : list) {
+//		    out.write((Hex.decode(element)));
+//		}
+//	}
 	
 	
 	@SuppressWarnings("null")
@@ -92,7 +105,7 @@ public class ImageConvertor{
 		ImageConvertor IC = new ImageConvertor();
 		byte [] inputBytes = null;
 		try {
-			inputBytes = IC.imageToBytes("/Users/Egmont/Documents/test.png");
+			inputBytes = IC.imageToBytes("/Users/Egmont/Documents/CryptoImageTest/Logo.bmp");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,7 +123,7 @@ public class ImageConvertor{
 		System.out.println(cipher);
 		//byte[] bytes = IC.stringListToBytes(cipher);
 		
-		IC.bytesToimage(IC.stringListToBytes(cipher));
+		//IC.bytesToimage(IC.stringListToBytes(cipher));
 
 
 
@@ -121,7 +134,7 @@ public class ImageConvertor{
 				cipher);
 		ArrayList<String> plaintext = operater2.decrypt();
 		System.out.println(plaintext);
-//		byte[] bytes = IC.stringListToBytes(plaintext);
-		//IC.bytesToimage(IC.stringListToBytes(plaintext));
+		byte[] bytes = IC.stringListToBytes(plaintext);
+		IC.bytesToimage(IC.stringListToBytes(plaintext));
 	}
 }
