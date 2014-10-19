@@ -10,9 +10,9 @@ import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.util.encoders.Hex;
 
 
-public class CBCOperater extends Operater {
+public class CBCOperator extends Operator {
 	
-	public CBCOperater(BlockCipher engine,RC5Parameters param,byte[] IV, ArrayList<String> input) {
+	public CBCOperator(BlockCipher engine,RC5Parameters param,byte[] IV, ArrayList<String> input) {
 		super(engine, param, IV, input);
 	
 	}
