@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bouncycastle.crypto.BlockCipher;
+import org.bouncycastle.crypto.modes.CBCBlockCipher;
 import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.operator.OutputCompressor;
 import org.bouncycastle.util.encoders.Hex;
@@ -75,7 +76,7 @@ public class TestCase {
 		case CBC:
 			
 			CBCOperator cbcOperator = 
-			new CBCOperator(engine, param, Hex.decode(this.initializationVector), input);
+			new CBCOperator(new CBCBlockCipher(engine), param, Hex.decode(this.initializationVector), input);
 			output = cbcOperator.encrypt();
 			modeString = "CBC";
 			break;
