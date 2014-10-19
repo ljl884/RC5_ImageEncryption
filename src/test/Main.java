@@ -37,6 +37,7 @@ public class Main {
 		
 		//----------------
 		
+		
 		//System.out.println("CBC mode:");
 		
 		ArrayList<String> input = new ArrayList<String>();
