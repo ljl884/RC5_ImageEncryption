@@ -6,92 +6,81 @@ import test.TestCase.OperationMode;
 
 public class Experiment {
 	
-	public static String inputFileName = "/Users/Egmont/Documents/CryptoImageTest/Logo.bmp";
-	public static String outFolder = "/Users/Egmont/Documents/CryptoImageTest/";
+	public static String inputFileName = "D:/Crypto/2.bmp";
+	public static String outFolder = "D:/Crypto/";
+
+	private static int[] wordsizeList ={16,32,64};
+	private static int[] roundsList = {2,6,12};
+	private static int[] keySizeList = {8,16,32,64};
+	private static OperationMode[] modeList = {OperationMode.CBC,OperationMode.ECB,OperationMode.CFB};
 
 	public static void main (String[] args) throws Exception{
 		
-
-		TestCase testcase = new TestCase(16, 2, "00000000", "0000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase.perform();
-		
-		TestCase testcase1 = new TestCase(16, 2, "00000000", "00000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase1.perform();
-		
-		TestCase testcase2 = new TestCase(16, 2, "00000000", "000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase2.perform();
-
-		TestCase testcase3 = new TestCase(16, 2, "00000000", "0000000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase3.perform();
-
-		TestCase testcase4 = new TestCase(16, 12, "00000000", "0000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase4.perform();
-
-		TestCase testcase5 = new TestCase(16, 12, "00000000", "00000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase5.perform();
-
-		TestCase testcase6 = new TestCase(16, 12, "00000000", "000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase6.perform();
-
-		TestCase testcase7 = new TestCase(16, 12, "00000000", "0000000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase7.perform();
-
-		TestCase testcase8 = new TestCase(32, 2, "0000000000000000", "0000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase8.perform();
-
-		TestCase testcase9 = new TestCase(32, 2, "0000000000000000", "00000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase9.perform();
-
-		TestCase testcase10 = new TestCase(32, 2, "0000000000000000", "000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase10.perform();
-
-		TestCase testcase11 = new TestCase(32, 2, "0000000000000000", "0000000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase11.perform();
-
-		TestCase testcase12 = new TestCase(32, 12, "0000000000000000", "0000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase12.perform();
-
-		TestCase testcase13 = new TestCase(32, 12, "0000000000000000", "00000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase13.perform();
-
-		TestCase testcase14 = new TestCase(32, 12, "0000000000000000", "000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase14.perform();
-
-		TestCase testcase15 = new TestCase(32, 12, "0000000000000000", "0000000000000000", 
-				inputFileName, outFolder, 
-				OperationMode.CBC);
-		testcase15.perform();
+		testSuite();
 		
 	}
+	
 
+	
+	private static void testSuite() throws Exception {
+		String IV ="";
+		String key = "";
+		int testNumber = 1;
+		for(int wordsize:wordsizeList){
+			for(int rounds: roundsList){
+				for(int keySize: keySizeList){
+					for(OperationMode operationMode: modeList){
+						System.out.println("Performing test case"+testNumber);
+						IV = getIV(wordsize);
+						key = getKey(keySize);
+						TestCase testCase = new TestCase(wordsize, rounds, IV, key, inputFileName, outFolder, operationMode);
+						testCase.perform();
+						testNumber++;
+					}
+					
+				}
+			}
+		}
+		System.out.println("Mission Complete!");
+	}
+
+	public static String getIV(int wordSize){
+		switch (wordSize) {
+		case 16:
+			return "00000000";
+			
+		case 32:
+			return "0000000000000000";
+			
+		case 64:
+			return "00000000000000000000000000000000";
+			
+		default:
+			return "";
+			
+			}
+	}
+	
+	public static String getKey(int keySize){
+		switch (keySize) {
+		case 8:
+			return "0000";
+			
+		case 16:
+			return "00000000";
+			
+		case 32:
+			return "0000000000000000";
+			
+		case 64:
+			return "00000000000000000000000000000000";
+			
+		default:
+			return "";
+		}
+	}
+	
+
+	
 }
+
