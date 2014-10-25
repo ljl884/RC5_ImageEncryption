@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.bouncycastle.crypto.BlockCipher;
+import org.bouncycastle.crypto.modes.CBCBlockCipher;
+import org.bouncycastle.crypto.modes.CFBBlockCipher;
 import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.operator.OutputCompressor;
 import org.bouncycastle.util.encoders.Hex;
@@ -18,7 +20,7 @@ public class TestCase {
 	private static String outputFolder;
 	
 	public enum OperationMode{  
-	   ECB,CBC  
+	   ECB,CBC,CFB  
 	}  
 	private OperationMode mode;
 	
@@ -75,9 +77,17 @@ public class TestCase {
 		case CBC:
 			
 			CBCOperator cbcOperator = 
-			new CBCOperator(engine, param, Hex.decode(this.initializationVector), input);
+			new CBCOperator(new CBCBlockCipher(engine), param, Hex.decode(this.initializationVector), input);
 			output = cbcOperator.encrypt();
 			modeString = "CBC";
+			break;
+			
+		case CFB:
+			
+			CFBOperator cfbOperator = 
+			new CFBOperator(new CFBBlockCipher(engine, 2*wordSize), param, Hex.decode(this.initializationVector), input);
+			output = cfbOperator.encrypt();
+			modeString = "CFB";
 			break;
 
 		default:

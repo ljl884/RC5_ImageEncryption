@@ -3,6 +3,7 @@ package test;
 import org.bouncycastle.crypto.BlockCipher;
 import org.bouncycastle.crypto.BufferedBlockCipher;
 import org.bouncycastle.crypto.CipherParameters;
+import org.bouncycastle.crypto.params.RC5Parameters;
 import org.bouncycastle.util.encoders.Hex;
 
 public class MyRC5Engine {
